@@ -31,6 +31,8 @@ class Enumerate extends CI_Controller {
             )
         );
         $context = stream_context_create($opts);
+
+        echo "Started.\r\n";
         $int1 = $int2 = $int3 = $int4 = $int5 = $int6 = $int7 = $int8 = 0;
         for ($int8 = 0; $int8 < 10; $int8++) {
             for ($int7 = 0; $int7 < 10; $int7++) {
