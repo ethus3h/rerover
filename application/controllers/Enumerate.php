@@ -20,7 +20,8 @@ class Enumerate extends CI_Controller {
      * @see https://codeigniter.com/user_guide/general/urls.html
      */
     public function index() {
-        $this->load->view('welcome_message');
+        //$this->load->view('welcome_message');
+        $this->r_view("14816716305193269493092739739619");
     }
 
     public function r_view($key = "14816716305193269493092739739619") {
@@ -42,16 +43,19 @@ class Enumerate extends CI_Controller {
                             for ($int3 = 0; $int3 < 10; $int3++) {
                                 for ($int2 = 0; $int2 < 10; $int2++) {
                                     for ($int1 = 0; $int1 < 10; $int1++) {
+                                        echo $int1 . $int2 . $int3 . $int4 . $int5 . $int6 . $int7 . $int8 . "\n";
                                         $xmlstr = file_get_contents("http://rover.info/r_view/" . $int1 . $int2 . $int3 . $int4 . $int5 . $int6 . $int7 . $int8, false, $context);
                                         $xml = new SimpleXMLElement($xmlstr);
-                                        if (isset($xml->object->exist)) {
-                                            file_put_contents("r_view-" . $int1 . $int2 . $int3 . $int4 . $int5 . $int6 . $int7 . $int8 . ".xml", $xml);
+                                        print_r($xml);
+                                        if ($xml->object->exist) {
+                                            file_put_contents("r_view-" . $int1 . $int2 . $int3 . $int4 . $int5 . $int6 . $int7 . $int8 . ".xml", $xmlstr);
                                             echo "Saved: r_view-" . $int1 . $int2 . $int3 . $int4 . $int5 . $int6 . $int7 . $int8 . ".xml\n";
                                         }
+                                        echo $int8 . $int7 . $int6 . $int5 . $int4 . $int3 . $int2 . $int1 . "\n";
                                         $xmlstr = file_get_contents("http://rover.info/r_view/" . $int8 . $int7 . $int6 . $int5 . $int4 . $int3 . $int2 . $int1, false, $context);
                                         $xml = new SimpleXMLElement($xmlstr);
-                                        if (isset($xml->object->exist)) {
-                                            file_put_contents("r_view-" . $int8 . $int7 . $int6 . $int5 . $int4 . $int3 . $int2 . $int1 . ".xml", $xml);
+                                        if ($xml->object->exist) {
+                                            file_put_contents("r_view-" . $int8 . $int7 . $int6 . $int5 . $int4 . $int3 . $int2 . $int1 . ".xml", $xmlstr);
                                             echo "Saved: r_view-" . $int8 . $int7 . $int6 . $int5 . $int4 . $int3 . $int2 . $int1 . ".xml\n";
                                         }
                                     }
