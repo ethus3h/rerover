@@ -34,7 +34,6 @@ class Enumerate extends CI_Controller {
         $context = stream_context_create($opts);
 
         echo "Started.\r\n";
-        $int1 = $int2 = $int3 = $int4 = $int5 = $int6 = $int7 = $int8 = 0;
         for ($int8 = 0; $int8 < 10; $int8++) {
             for ($int7 = 0; $int7 < 10; $int7++) {
                 for ($int6 = 0; $int6 < 10; $int6++) {
@@ -43,21 +42,12 @@ class Enumerate extends CI_Controller {
                             for ($int3 = 0; $int3 < 10; $int3++) {
                                 for ($int2 = 0; $int2 < 10; $int2++) {
                                     for ($int1 = 0; $int1 < 10; $int1++) {
-                                        echo $int1 . $int2 . $int3 . $int4 . $int5 . $int6 . $int7 . $int8 . "\n";
-                                        $xmlstr = file_get_contents("http://rover.info/r_view/" . $int1 . $int2 . $int3 . $int4 . $int5 . $int6 . $int7 . $int8, false, $context);
-                                        $xml = new SimpleXMLElement($xmlstr);
-                                        //$xml = (Array) $xml;
-                                        print_r($xml);
-                                        if (xml_attribute($xml, 'exist') == 1) {
-                                            file_put_contents("r_view-" . $int1 . $int2 . $int3 . $int4 . $int5 . $int6 . $int7 . $int8 . ".xml", $xmlstr);
-                                            echo "Saved: r_view-" . $int1 . $int2 . $int3 . $int4 . $int5 . $int6 . $int7 . $int8 . ".xml\n";
-                                        }
                                         echo $int8 . $int7 . $int6 . $int5 . $int4 . $int3 . $int2 . $int1 . "\n";
                                         $xmlstr = file_get_contents("http://rover.info/r_view/" . $int8 . $int7 . $int6 . $int5 . $int4 . $int3 . $int2 . $int1, false, $context);
                                         $xml = new SimpleXMLElement($xmlstr);
                                         //$xml = (Array) $xml;
-                                        print_r($xml);
-                                        if (xml_attribute($xml, 'exist') == 1) {
+                                        //print_r($xml);
+                                        if ($this->xml_attribute($xml, 'exist')) {
                                             file_put_contents("r_view-" . $int8 . $int7 . $int6 . $int5 . $int4 . $int3 . $int2 . $int1 . ".xml", $xmlstr);
                                             echo "Saved: r_view-" . $int8 . $int7 . $int6 . $int5 . $int4 . $int3 . $int2 . $int1 . ".xml\n";
                                         }
@@ -69,6 +59,11 @@ class Enumerate extends CI_Controller {
                 }
             }
         }
+    }
+
+    function xml_attribute($object, $attribute) {
+        if (isset($object[$attribute]))
+            return (string) $object[$attribute];
     }
 
 }
