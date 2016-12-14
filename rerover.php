@@ -56,7 +56,7 @@ class rerover extends Thread {
 
 for ($i = 0; $i < 10; $i++) {
     for ($j = 0; $j < 10; $j++) {
-        $workers[$i] = new workerThread($i, $j);
-        $workers[$i]->start();
+        $workers[(int)$i.$j] = new workerThread($i, $j);
+        $workers[(int)$i.$j]->start();
     }
 }
