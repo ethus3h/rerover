@@ -23,7 +23,14 @@ class Enumerate extends CI_Controller {
         $this->load->view('welcome_message');
     }
 
-    public function r_view() {
+    public function r_view($key = "14816716305193269493092739739619") {
+        $opts = array(
+            'http' => array(
+                'method' => "GET",
+                'header' => "Cookie: ukey=" . $key . "\r\n"
+            )
+        );
+        $context = stream_context_create($opts);
         $int1 = $int2 = $int3 = $int4 = $int5 = $int6 = $int7 = $int8 = 0;
         for ($int8 = 0; $int8 < 10; $int8++) {
             for ($int7 = 0; $int7 < 10; $int7++) {
@@ -33,13 +40,13 @@ class Enumerate extends CI_Controller {
                             for ($int3 = 0; $int3 < 10; $int3++) {
                                 for ($int2 = 0; $int2 < 10; $int2++) {
                                     for ($int1 = 0; $int1 < 10; $int1++) {
-                                        $xmlstr = file_get_contents("http://rover.info/r_view/" . $int1 . $int2 . $int3 . $int4 . $int5 . $int6 . $int7 . $int8);
+                                        $xmlstr = file_get_contents("http://rover.info/r_view/" . $int1 . $int2 . $int3 . $int4 . $int5 . $int6 . $int7 . $int8, false, $context);
                                         $xml = new SimpleXMLElement($xmlstr);
                                         if (isset($xml->object->exist)) {
                                             file_put_contents("r_view-" . $int1 . $int2 . $int3 . $int4 . $int5 . $int6 . $int7 . $int8 . ".xml", $xml);
                                             echo "Saved: r_view-" . $int1 . $int2 . $int3 . $int4 . $int5 . $int6 . $int7 . $int8 . ".xml\n";
                                         }
-                                        $xmlstr = file_get_contents("http://rover.info/r_view/" . $int8 . $int7 . $int6 . $int5 . $int4 . $int3 . $int2 . $int1);
+                                        $xmlstr = file_get_contents("http://rover.info/r_view/" . $int8 . $int7 . $int6 . $int5 . $int4 . $int3 . $int2 . $int1, false, $context);
                                         $xml = new SimpleXMLElement($xmlstr);
                                         if (isset($xml->object->exist)) {
                                             file_put_contents("r_view-" . $int8 . $int7 . $int6 . $int5 . $int4 . $int3 . $int2 . $int1 . ".xml", $xml);
