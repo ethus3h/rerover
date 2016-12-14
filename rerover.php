@@ -30,9 +30,8 @@ class rerover extends Thread {
                     for ($int3 = 0; $int3 < 10; $int3++) {
                         for ($int2 = 0; $int2 < 10; $int2++) {
                             for ($int1 = 0; $int1 < 10; $int1++) {
-                                echo $int8 . $int7 . $int6 . $int5 . $int4 . $int3 . $int2 . $int1 . "\n";
                                 $xmlstr = file_get_contents("http://rover.info/r_view/" . $int8 . $int7 . $int6 . $int5 . $int4 . $int3 . $int2 . $int1, false, $context);
-                                $xml = new SimpleXMLElement($xmlstr);
+                                try {$xml = new SimpleXMLElement($xmlstr); } catch (Exception $ex) {}
                                 //$xml = (Array) $xml;
                                 //print_r($xml);
                                 if ($this->xml_attribute($xml, 'exist')) {
@@ -56,7 +55,7 @@ class rerover extends Thread {
 
 for ($i = 0; $i < 10; $i++) {
     for ($j = 0; $j < 10; $j++) {
-        $workers[(int)$i.$j] = new workerThread($i, $j);
+        $workers[(int)$i.$j] = new rerover($i, $j);
         $workers[(int)$i.$j]->start();
     }
 }
