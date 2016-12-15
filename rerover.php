@@ -4,12 +4,11 @@ class rerover extends Thread {
 
     public function __construct($i = 0) {
         $this->i = $i;
-        $this->j = $j;
     }
 
     public function run() {
         //$this->load->view('welcome_message');
-        $this->r_view("14816716305193269493092739739619", $this->i, $this->j);
+        $this->r_view("14816716305193269493092739739619", $this->i);
     }
 
     public function r_view($key = "14816716305193269493092739739619", $i = 0) {
@@ -60,6 +59,6 @@ class rerover extends Thread {
 }
 
 for ($i = 0; $i < 10; $i++) {
-        $workers[$i] = new rerover($i);
-        $workers[$i]->start();
+    $workers[$i] = new rerover($i);
+    $workers[$i]->start();
 }
